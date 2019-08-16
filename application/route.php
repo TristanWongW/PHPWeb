@@ -44,3 +44,4 @@ Route::controller("/homeindex","home/Index");
 Route::controller("/homelist","home/Listp");
 
 
+?>
