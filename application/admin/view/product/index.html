@@ -1,0 +1,79 @@
+{extend name="adminpublic:public"}
+{block name="admin"}
+    <div class="mws-panel grid_8">
+        <div class="mws-panel-header"> <span><i class="icon-table"></i>商品列表</span>
+    
+        </div>
+        <div class="mws-panel-body no-padding">
+            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+                <div id="content">
+                <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
+                    aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
+                                aria-label="Browser: activate to sort column ascending" style="width: 250px;">商品ID</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 250px;">商品名</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 250px;">商品类</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                style="width: 234px;">商品描述</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                style="width: 234px;">商品图片</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                style="width: 234px;">商品库存</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                style="width: 234px;">商品单价</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+                                style="width: 120px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                        {foreach name="product" item="row"}
+                        <tr class="odd">
+                            <td class="  sorting_1">{$row['id']}</td>
+                            <td class=" ">{$row['cname']}</td>
+                            <td class=" ">{$row['name']}</td>
+                            <td class=" ">{$row['descr']}</td>
+                            <td class=" "><img src='{$row["pic"]}'></td>
+                            <td class=" ">{$row['num']}</td>
+                            <td class=" ">{$row['price']}</td>
+                            <td class=" "><a href="/adminproduct/delete/id/{$row['id']}" class="btn btn-success">删除</a><a href="/adminproduct/edit/id/{$row['id']}" class="btn btn-info">修改</a></td>
+                        </tr>
+                        {/foreach}
+                        
+                    </tbody>
+                </table>
+                </div>
+                
+                <div class="dataTables_paginate paging_full_numbers" id="pages">
+                    {foreach name="pp" item="row"}
+                    <li><a href="javascript:void(0)" onclick="page({$row})">{$row}</a></li>
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+       
+        function page(aa){
+            // console.log(aa);
+            // alert(aa);
+            $.get("/adminproduct/index",{page:aa},function(data){
+                // alert(data);
+                //赋值
+                $("#content").html(data);
+            }); 
+        }
+    </script>
+{/block}
+{block name="title"}公告列表{/block}

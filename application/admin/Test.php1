@@ -1,0 +1,31 @@
+<?php
+namespace app\admin\controller;
+//导入 Controller
+use think\Controller;
+class Test extends Controller
+{   
+    //请求方式  get 
+    public function index()
+    {
+       echo " 这是测试访问控制器 ";
+    }
+
+    public function index1($id){
+        echo $id;
+    }
+    
+    public function getindex3(){
+        echo "这是快捷访问控制器";
+    }
+
+    public function getindex4(){
+        // $this->success("跳转成功","/test3/index5");
+        // $this->error("跳转失败","/test3/index5");
+        //重定向
+        $this->redirect("/test3/index5 ");
+    }
+
+    public function getindex5(){
+        echo "there is index 5";
+    }
+}

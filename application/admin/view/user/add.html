@@ -1,0 +1,43 @@
+{extend name="adminpublic:public"}
+{block name="admin"}
+<div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+        <span>用户添加</span>
+    </div>
+    <div class="mws-panel-body no-padding">
+        <form class="mws-form" action="/adminuser/insert" method="POST">
+            <div class="mws-form-inline">
+                <div class="mws-form-row">
+                    <label class="mws-form-label">用户名</label>
+                    <div class="mws-form-item">
+                        <input type="text" class="medium" name="username">
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">密码</label>
+                    <div class="mws-form-item">
+                        <input type="password" class="medium" name="pwd">
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">确认密码</label>
+                    <div class="mws-form-item">
+                        <input type="password" class="medium" name="repwd">
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">等级</label>
+                    <div class="mws-form-item">
+                        <input type="text" class="medium" name="state">
+                    </div>
+                </div>
+                
+            <div class="mws-button-row">
+                <input type="submit" value="添加" class="btn btn-danger">
+                <input type="reset" value="重置" class="btn ">
+            </div>
+        </form>
+    </div>
+</div>
+{/block}
+{block name="title"}后台用户添加{/block}

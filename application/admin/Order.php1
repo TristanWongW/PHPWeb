@@ -1,0 +1,35 @@
+<?php
+namespace app\admin\controller;
+
+class Order
+{   
+    //请求方式  get 
+    public function getindex()
+    {
+       echo "This is a admin 模块 order 控制下的 index方法  ";
+    }
+
+    //订单列表
+    public function getindex1(){
+        echo '这是订单列表';
+    }
+    //订单添加
+    public function getadd(){
+        echo "这是订单添加";
+    }
+    //订单已经受理
+    public function handle(){
+        echo '订单已经受理';
+    }
+    //路由别名测试
+    public function index3(){
+        echo '这是一个路由别名实验';
+    }
+    //路由组
+    public function index5(){
+        echo '路由组 第一组 index5';
+    }
+    public function index6(){
+        echo '路由组2 第二组 index6';
+    }
+}

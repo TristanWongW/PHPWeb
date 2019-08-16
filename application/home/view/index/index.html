@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>前台首页</title>
+</head>
+<body>
+    <!-- Widget类下的header方法 -->
+
+    {:widget("Widget/header")}
+
+            <div class="umino-slider_area umino-slider_area-4">
+              <div class="container-fluid">
+                <div class="row no-gutters">
+                  <div class="col-lg-12">
+                    <div class="main-slider slider-navigation_style-1">
+                      <!-- Begin Single Slide Area -->
+                      <div class="single-slide animation-style-04 bg-7">
+                        <div class="container">
+                          <div class="slider-content">
+                            <h4>Wooden Chair.</h4>
+                            <h3>Morden Furniture</h3>
+                            <p class="short-desc">Aenean pretium convallis lorem, sit amet dapibus ante mollis a. Integer bibendum
+                              interdum </p>
+                            <div class="umino-btn-ps_left slide-btn">
+                              <a class="umino-slider_btn umino-btn_dark" href="shop-left-sidebar.html">Shop Now</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Single Slide Area End Here -->
+                      <!-- Begin Single Slide Area -->
+                      <div class="single-slide animation-style-04 bg-8">
+                        <div class="container">
+                          <div class="slider-content">
+                            <h4>Wooden Chair.</h4>
+                            <h3>Morden Furniture</h3>
+                            <p class="short-desc">Aenean pretium convallis lorem, sit amet dapibus ante mollis a. Integer bibendum
+                              interdum </p>
+                            <div class="icon-area">
+                              <ul>
+                                <li>
+                                  <img src="/static/homes/images/slider/slider-icon/1.png" alt="Umino's Slider Icon">
+                                </li>
+                                <li>
+                                  <img src="/static/homes/images/slider/slider-icon/2.png" alt="Umino's Slider Icon">
+                                </li>
+                                <li>
+                                  <img src="/static/homes/images/slider/slider-icon/3.png" alt="Umino's Slider Icon">
+                                </li>
+                                <li>
+                                  <img src="/static/homes/images/slider/slider-icon/4.png" alt="Umino's Slider Icon">
+                                </li>
+                              </ul>
+                            </div>
+                            <a class="product-price" href="shop-left-sidebar.html">
+                              <span>$200.45</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Single Slide Area End Here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Begin Umino's Banner Area Seven -->
+            <div class="umino-banner_area umino-banner_area-7">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6">
+                    <div class="banner-item img-hover_effect">
+                      <div class="banner-img">
+                        <a href="javascript:void(0)">
+                          <img class="img-full" src="/static/homes/images/banner/4-3.jpg" alt="Umino's Banner">
+                        </a>
+                      </div>
+                      <div class="banner-content">
+                        <span>Trending</span>
+                        <h4>Bottle Humidifier</h4>
+                        <h3>Living Room Set</h3>
+                        <p>打发是的发送到发送到的所发生的发送的大声道的发送到发送到打发斯蒂芬</p>
+                        <!-- <a href="javascript:void(0)">
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                          </a> -->
+                      </div>
+                    </div>
+                  </div><div class="col-lg-4 col-md-6">
+                    <div class="banner-item img-hover_effect">
+                      <div class="banner-img">
+                        <a href="javascript:void(0)">
+                          <img class="img-full" src="/static/homes/images/banner/4-3.jpg" alt="Umino's Banner">
+                        </a>
+                      </div>
+                      <div class="banner-content">
+                        <span>Trending</span>
+                        <h4>Bottle Humidifier</h4>
+                        <h3>Living Room Set</h3>
+                        <p>打发是的发送到发送到的所发生的发送的大声道的发送到发送到打发斯蒂芬</p>
+                        <!-- <a href="javascript:void(0)">
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                          </a> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                    <div class="banner-item img-hover_effect">
+                      <div class="banner-img">
+                        <a href="javascript:void(0)">
+                          <img class="img-full" src="/static/homes/images/banner/4-3.jpg" alt="Umino's Banner">
+                        </a>
+                      </div>
+                      <div class="banner-content">
+                        <span>Trending</span>
+                        <h4>Bottle Humidifier</h4>
+                        <h3>Living Room Set</h3>
+                        <p>打发是的发送到发送到的所发生的发送的大声道的发送到发送到打发斯蒂芬</p>
+                        <!-- <a href="javascript:void(0)">
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                          </a> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Umino's Banner Area Seven End Here -->
+            
+            <!-- 商品遍历部分 -->
+            {foreach name="category" item="row"}
+            <div class="umino-product-tab_area">
+              <div class="umino-product-tab_nav">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="product-tab">
+                        <ul class="nav product-menu">
+                          <li><a class="active" data-toggle="tab" href="#"><span>{$row['name']}</span></a></li>
+                          {foreach name="row['shop']" item="rows"}
+                          <li class="lt" cid="{$rows['id']}"><a data-toggle="tab" href="#new-arrivals"><span>{$rows['name']}</span></a></li>
+                          {/foreach}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="tab-content umino-tab_content">
+                      <div id="featured" class="tab-pane active show" role="tabpanel">
+                        <div class="umino-product-tab_slider slider-navigation_style-1">
+                          <div class="slide-item">
+                            <div class="single-product">
+                              <div class="product-img">
+                                <a href="single-product.html">
+                                  <img class="primary-img" src="/static/homes/images/product/medium-size/4-2.jpg"
+                                    alt="Umino's Product Image">
+                                </a>
+                                <div class="add-actions">
+                                  <ul>
+                                    <li><a href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To cart"><i
+                                          class="ion-bag"></i></a>
+                                    </li>
+                                    <li><a href="wishlist.html" data-toggle="tooltip" data-placement="top"
+                                        title="Add To Wishlist"><i class="ion-ios-heart-outline"></i></a>
+                                    </li>
+                                    <li><a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i
+                                          class="fa fa-chart-bar"></i></a>
+                                    </li>
+                                    <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
+                                        href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
+                                          class="ion-ios-search"></i></a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="product-content">
+                                <div class="product-desc_info">
+                                  <div class="price-box">
+                                    <span class="new-price">$79.00</span>
+                                    <span class="old-price">$85.00</span>
+                                  </div>
+                                  <h6 class="product-name"><a href="single-product.html">Curabitur tristique neque</a>
+                                  </h6>
+                                  <div class="rating-box">
+                                    <ul>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li class="silver-color"><i class="ion-ios-star-outline"></i></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div id="new-arrivals" class="tab-pane" role="tabpanel">
+                        <div class="umino-product-tab_slider slider-navigation_style-1">
+                          <div class="slide-item">
+                            <div class="single-product">
+                              <div class="product-img">
+                                <a href="single-product.html">
+                                  <img class="primary-img" src="/static/homes/images/product/medium-size/8-1.jpg"
+                                    alt="Umino's Product Image">
+                                </a>
+                                <div class="add-actions">
+                                  <ul>
+                                    <li><a href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To cart"><i
+                                          class="ion-bag"></i></a>
+                                    </li>
+                                    <li><a href="wishlist.html" data-toggle="tooltip" data-placement="top"
+                                        title="Add To Wishlist"><i class="ion-ios-heart-outline"></i></a>
+                                    </li>
+                                    <li><a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i
+                                          class="fa fa-chart-bar"></i></a>
+                                    </li>
+                                    <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
+                                        href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
+                                          class="ion-ios-search"></i></a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="product-content">
+                                <div class="product-desc_info">
+                                  <div class="price-box">
+                                    <span class="new-price">$70.00</span>
+                                    <span class="old-price">$80.00</span>
+                                  </div>
+                                  <h6 class="product-name"><a href="single-product.html">Aliquet auctor semali</a>
+                                  </h6>
+                                  <div class="rating-box">
+                                    <ul>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li class="silver-color"><i class="ion-ios-star-half"></i></li>
+                                      <li class="silver-color"><i class="ion-ios-star-outline"></i></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="best-seller" class="tab-pane" role="tabpanel">
+                        <div class="umino-product-tab_slider slider-navigation_style-1">
+                          <div class="slide-item">
+                            <div class="single-product">
+                              <div class="product-img">
+                                <a href="single-product.html">
+                                  <img class="primary-img" src="/static/homes/images/product/medium-size/5-3.jpg"
+                                    alt="Umino's Product Image">
+                                </a>
+                                <div class="add-actions">
+                                  <ul>
+                                    <li><a href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To cart"><i
+                                          class="ion-bag"></i></a>
+                                    </li>
+                                    <li><a href="wishlist.html" data-toggle="tooltip" data-placement="top"
+                                        title="Add To Wishlist"><i class="ion-ios-heart-outline"></i></a>
+                                    </li>
+                                    <li><a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i
+                                          class="fa fa-chart-bar"></i></a>
+                                    </li>
+                                    <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
+                                        href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
+                                          class="ion-ios-search"></i></a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="product-content">
+                                <div class="product-desc_info">
+                                  <div class="price-box">
+                                    <span class="new-price">$95.00</span>
+                                    <span class="old-price">$100.00</span>
+                                  </div>
+                                  <h6 class="product-name"><a href="single-product.html">Accumsan mauris ullaat</a>
+                                  </h6>
+                                  <div class="rating-box">
+                                    <ul>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li><i class="ion-ios-star"></i></li>
+                                      <li class="silver-color"><i class="ion-ios-star-half"></i></li>
+                                      <li class="silver-color"><i class="ion-ios-star-outline"></i></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/foreach}
+            <!-- Umino's Product Tab Area End Here -->
+            <!-- Begin Umino's Banner Area -->
+            
+            <!-- Begin Umino's Brand Area -->
+            <div class="umino-brand_area">
+              <div class="container">
+                <div class="umino-brand_nav">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="umino-brand_slider slider-navigation_style-1">
+                        <div class="slide-item">
+                          <a href="javascript:void(0)">
+                            <img src="/static/homes/images/brand/1.jpg" alt="Umino's Brand Image">
+                          </a>
+                        </div>
+                        <div class="slide-item">
+                          <a href="javascript:void(0)">
+                            <img src="/static/homes/images/brand/2.jpg" alt="Umino's Brand Image">
+                          </a>
+                        </div>
+                        <div class="slide-item">
+                          <a href="javascript:void(0)">
+                            <img src="/static/homes/images/brand/3.jpg" alt="Umino's Brand Image">
+                          </a>
+                        </div>
+                        <div class="slide-item">
+                          <a href="javascript:void(0)">
+                            <img src="/static/homes/images/brand/4.jpg" alt="Umino's Brand Image">
+                          </a>
+                        </div>
+                        <div class="slide-item">
+                          <a href="javascript:void(0)">
+                            <img src="/static/homes/images/brand/5.jpg" alt="Umino's Brand Image">
+                          </a>
+                        </div>
+                        <div class="slide-item">
+                          <a href="javascript:void(0)">
+                            <img src="/static/homes/images/brand/1.jpg" alt="Umino's Brand Image">
+                          </a>
+                        </div>
+                        <div class="slide-item">
+                          <a href="javascript:void(0)">
+                            <img src="/static/homes/images/brand/2.jpg" alt="Umino's Brand Image">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Umino's Brand Area End Here -->
+<script type="text/javascript">
+  // alert($);
+  $(".lt").click(function(){
+    // alert("哈哈哈");
+    //获取cid属性 也就是当前一级分类的id
+    cid = $(this).attr('cid');
+    alert(cid);
+  });
+</script>
+
+    {:widget("Widget/footer")}
+</body>
+</html>

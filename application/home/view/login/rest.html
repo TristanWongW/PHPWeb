@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>密码重置</title>
+    <style>
+      .col-center-block {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+     .cur{
+  		border:1px solid red !important;
+  	  }
+      .curs{
+        border: 1px solid green !important;
+      }
+    </style>
+</head>
+<body>
+    <!-- Widget类下的header方法 -->
+    {:widget("Widget/header")}
+  <div class="umino-login-register_area" style=" vertical-align: middle;">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12 col-center-block">
+        <form action="/homelogin/reset" method="POST">
+          <div class="login-form">
+            <h4 class="login-title">重设密码</h4>
+            <div class="row">
+              <div class="col-md-12 col-12">
+                <label>新密码</label>
+                <input type="password" placeholder="请输入新密码" name="pwd" reminder="请输入新密码"><span></span>
+              </div>
+              <div class="col-12 mb--20">
+                <label>确认新密码</label>
+                <input type="password" placeholder="请重新输入密码" name="repwd" reminder="请再次输入新密码"><span></span>
+              </div>
+              <input type="hidden" name="phone" value="{$phone}">
+              <div class="col-md-12">
+                <button class="umino-login_btn">确认修改</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+    PWD = false;
+    REPWD = false;
+    //获取焦点
+    $("input").focus(function(){
+      //获取reminder
+      reminder = $(this).attr('reminder');
+      //红字提示
+      $(this).next("span").css("color","red").html(reminder);
+      //边框红色提示
+      $(this).addClass('cur');
+    });
+
+    $("input[name='pwd']").blur(function(){
+      //获取密码
+      pwd = $(this).val();
+      //正则限定
+      if (pwd.match(/^\w{6,11}$/) == null) {
+        $(this).next("span").css("color","red").html("密码太过简单");
+        $(this).addClass("cur");
+        PWD = false;
+      } else {
+        $(this).next("span").css("color", "green").html("密码可用");
+        //移出样式
+        $(this).removeClass("cur");
+        //添加样式
+        $(this).addClass("curs");
+        PWD = true;
+      }
+    });
+
+    //重复密码
+     $("input[name='repwd']").blur(function () {
+      //获取重复密码的值
+      repwd = $(this).val();
+      //正则匹配
+      if (repwd.match(/^\w{6,8}$/) == null) {
+        $(this).next("span").css("color", "red").html("密码必须是6-8位的任意数字字母下划线");
+        //添加样式
+        $(this).addClass("cur");
+        REPWD = false;
+      } else {
+        //密码比对
+        //获取密码
+        pwd = $("input[name='pwd']").val();
+        if (pwd == repwd) {
+          $(this).next("span").css("color", "green").html("密码一致");
+          //移除红色样式
+          $(this).removeClass("cur");
+          //添加绿色
+          $(this).addClass("curs");
+          REPWD = true;
+        } else {
+          $(this).next("span").css("color", "red").html("两次输入的密码不一致");
+          //添加红色
+          $(this).addClass("cur");
+          REPWD = false;
+        }
+      }
+    });
+
+    //表单提交事件
+    $("form").submit(function () {
+      //让input框触发失去焦点事件
+      $("input").trigger("blur");
+      if (PWD && REPWD) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  })
+</script>
+    {:widget("Widget/footer")}
+</body>
+</html>

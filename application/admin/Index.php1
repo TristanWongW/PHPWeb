@@ -1,0 +1,46 @@
+<?php
+namespace app\admin\controller;
+//导入Config.php
+use think\Config;
+class Index
+{
+    public function index()
+    {
+       echo "This is a new module for Object";
+    }
+
+    //加载第三方支付类库
+    public function index1(){
+        // echo '经过路由调用第三方类';
+        //实例化三方类库Pay
+        $pay = new \org\util\Pay();
+        // echo "<pre>";
+        // var_dump($pay);
+        // 调用支付方法
+        $pay->pay();
+    }
+
+    //加载发送邮件类
+    public function mail(){
+        sendmails();
+    }
+
+    //配置信息的读取和设置
+    public function config(){
+        // echo Config::get('app_debug');
+        //设置
+        Config::set('app_debug',false);
+        //读取  
+        echo Config::get('app_debug');
+        
+    }
+
+    //普通路由
+    public function index2($id){
+        echo $id;
+    }
+    public function index3($name,$id){
+        echo $name.':'.$id;
+    }
+
+}

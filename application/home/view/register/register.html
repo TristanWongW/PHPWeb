@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>会员注册</title>
+    <style>
+      .col-center-block {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .cur{
+  		border:1px solid red !important;
+  	  }
+      .curs{
+        border: 1px solid green !important;
+      }
+    </style>
+</head>
+<body>
+    <!-- Widget类下的header方法 -->
+
+    {:widget("Widget/header")}
+    <div class="umino-login-register_area" style=" vertical-align: middle;">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12 col-center-block">
+            <form action="/homeregister/doregister" method="POST">
+              <div class="login-form">
+                <h4 class="login-title">用户注册</h4>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>账号</label>
+                    <input type="text" name="username" placeholder="请输入账号名" reminder="请输入账号">
+                    <span></span>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <label>电话号码*</label>
+                    <input type="text" name="phone" placeholder="请输入11手机号" reminder="请手机号码"><span></span>
+                  </div>
+                  <!-- <div class="col-md-12">
+                    <label>邮箱*</label>
+                    <input type="email" name="email" placeholder="请输入邮箱地址" reminder="请输入邮箱"><span></span>
+                  </div> -->
+                  <!-- <div class="col-md-6">
+                    <label>点击获取验证码</label>
+                    <button href="javascript:void(0)" disabled="disabled" class="btn btn-success" id="ss">获取验证码</button>
+                  </div> -->
+                  <div class="col-md-6">
+                    <label>密码</label>
+                    <input type="password" name="pwd" placeholder="密码" reminder="请输入密码"><span></span>
+                  </div>
+                  <div class="col-md-6">
+                    <label>确认密码</label>
+                    <input type="password" name="repwd" placeholder="请确认密码" reminder="请输入重复密码"><span></span>
+                  </div>
+                  <!-- <div class="col-md-6">
+                    <label>输入验证码</label>
+                    <input type="text" value="" name="code"   reminder="请输入校验码"><span></span>
+                  </div> -->
+                  <div class="col-12">
+                    <button type="submit" value="" class="umino-register_btn" data-loading-text="Loading..." >提交注册</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+//阿贾克斯
+  $(function () {
+      NAME = false;
+      // EMAIL = false;
+      PWD = false;
+      REPWD = false;
+      PHONE = false;
+      // CODE = false;
+      // alert($); //监测jquery是否生效
+      //获取焦点事件
+      $("input").focus(function(){
+        //获取reminder
+        reminder = $(this).attr("reminder");
+        // alert(reminder);
+        $(this).next("span").css("color","red").html(reminder);
+        //给边框加样式
+        $(this).addClass("cur");
+      });
+      
+      //失去焦点 用户名部分
+      $("input[name='username']").blur(function(){
+        //在ajax中$(this)解析不了 next("span"); 所以给$(this)赋值
+        o = $(this);
+        //获取用户名
+        name = o.val();
+        // alert(name);
+        if (name.match(/^\w{4,11}$/)==null) {
+          //用户名不符合规则
+          // alert("用户名不合法");
+          o.next("span").css("color","red").html("用户名不合法");
+          o.addClass("cur");
+          NAME = false;
+        } else {
+          //ajax验证 用户名是否已存在
+          $.get("/homeregister/checkname",{username:name},function(data){
+            // alert(data);
+            if (data == 1) {
+              //用户名已存在
+              // alert(1);
+              o.next("span").css("color", "red").html("用户名已存在");
+              o.addClass("cur");
+              NAME = false;
+            } else {
+              // alert(2);
+              //用户名未被注册
+              o.next("span").css("color", "green").html("用户名可用");
+              //清除样式
+              o.removeClass("cur");
+              //添加样式
+              o.addClass("curs");
+              NAME = true;
+            }
+          });
+        }
+      });
+      //失去焦点事件 邮箱部分
+      // $("input[name='email']").blur(function(){
+      //   //在ajax中$(this)解析不了 next("span"); 所以给$(this)赋值
+      //   o = $(this);
+      //   //获取邮箱值
+      //   email = o.val();
+      //   // alert(email);
+      //   //正则匹配
+      //   if (email.match(/^\w+@\w+(\.\w+)$/) == null) {
+      //     //邮箱不和规则
+      //     // alert('邮箱不符合规则');
+      //     o.next("span").css("color","red").html("请输入正确邮箱格式");
+      //     o.addClass("cur");
+      //     EMAIL = false;
+      //   } else {
+      //     // alert('邮箱可用');
+      //     //检测邮箱是否被占用
+      //     //Ajax 
+      //     $.get("/homeregister/checkmail",{email:email},function(data){
+      //       // alert(data);
+      //       if (data == 1) {
+      //         //邮箱已经存在
+      //         o.next("span").css("color","red").html("邮箱已经注册");
+      //         o.addClass("cur");
+      //          PWD = false;
+      //       } else {
+      //         //邮箱未被注册
+      //         o.next("span").css("color","green").html("邮箱可用");
+      //         //清除样式
+      //         o.removeClass("cur");
+      //         //添加样式
+      //         o.addClass("curs");
+      //         EMAIL = true;
+      //       }
+      //     });
+      //   }
+      // });
+
+      //密码部分
+      $("input[name='pwd']").blur(function(){
+        //获取密码
+        pwd = $(this).val();
+        //正则匹配
+        if (pwd.match(/^\w{6,8}$/)== null) {
+            $(this).next("span").css("color", "red").html("密码必须是6-8位的任意数字字母下划线");
+            //添加样式
+            $(this).addClass("cur");
+            PWD = false;
+        } else{
+            $(this).next("span").css("color", "green").html("密码可用");
+            //移除红色样式
+            $(this).removeClass("cur");
+            //添加绿色
+            $(this).addClass("curs");
+            PWD = true;
+        }
+      });
+
+      //重复密码
+      $("input[name='repwd']").blur(function(){
+        //获取重复密码的值
+        repwd = $(this).val();
+        //正则匹配
+        if (repwd.match(/^\w{6,8}$/) == null) {
+          $(this).next("span").css("color", "red").html("密码必须是6-8位的任意数字字母下划线");
+          //添加样式
+          $(this).addClass("cur");
+          REPWD = false;
+        } else {
+          //密码比对
+          //获取密码
+          pwd = $("input[name='pwd']").val();
+          if (pwd == repwd) {
+            $(this).next("span").css("color", "green").html("密码一致");
+             //移除红色样式
+            $(this).removeClass("cur");
+            //添加绿色
+            $(this).addClass("curs");
+            REPWD = true;
+          } else {
+            $(this).next("span").css("color", "red").html("两次输入的密码不一致");
+            //添加红色
+            $(this).addClass("cur");
+            REPWD = false;
+          }
+        }
+      });
+
+      //手机号码
+      $("input[name='phone']").blur(function () {
+          op = $(this);
+          //获取重复密码的值
+          phone = op.val();
+
+          //手机号正则匹配
+          if (phone.match(/^[1]([3-9])[0-9]{9}$/) == null) {
+            op.next("span").css("color", "red").html("请输入正确手机号码");
+            //添加样式
+            $(this).addClass("cur");
+            PHONE = false;
+          } else {
+              //ajax验证 手机号是否被注册
+              $.get("/homeregister/checkphone",{phone:phone},function(data){
+                // alert(data);
+                 if (data == 1) {
+                  //号码已经存在
+                  op.next("span").css("color", "red").html("该号码已经注册");
+                  op.addClass("cur");
+                  PHONE = false;
+                } else {
+                  //未被注册
+                  op.next("span").css("color", "green").html("号码可用");
+                  //清除样式
+                  op.removeClass("cur");
+                  //添加样式
+                  op.addClass("curs");
+                  PHONE = true;
+                }
+              });
+          }
+        });
+        
+        //获取校验码
+        $("#ss").click(function(){
+          ox = $(this);
+          //获取手机号
+          p = $("input[name='phone']").val();
+          // alert(p);
+          //Ajax
+          $.get("/homeregister/checkp",{p:p},function(data){
+            // alert(data.code); //输出json格式数据
+            //判断
+            if(data.code == 000000){
+                //执行倒计时
+                m = 60;
+                mytime =  setInterval(function(){
+                  m--;
+                  //赋值给button
+                  ox.html(m+"秒后重新发送");
+                  //把按钮禁用
+                  ox.attr("disabled",true);
+                  if (m==0) {
+                    //清除定时器
+                    clearInterval(mytime);
+                    //赋值按钮
+                    ox.html("重新发送");
+                    //激活按钮
+                    ox.attr("disabled",false);
+                  }
+                },1000);
+            }
+          },'json');
+        });
+
+        //输入校验码
+        $("input[name='code']").blur(function(){
+          ob = $(this);
+          //获取输入的校验码
+          code = $(this).val();
+          //Ajax验证
+          $.get("/homeregister/checkcode",{code:code},function(data){
+            // alert(data);
+            if (data == 1) {
+              ob.next("span").css("color", "green").html("验证码正确");
+                //清除样式
+              ob.removeClass("cur");
+              //添加样式
+              ob.addClass("curs");
+              CODE = true;
+            } else if(data == 0){
+              ob.next("span").css("color", "red").html("验证码有误");
+              //添加样式
+              ob.addClass("cur");
+              CODE = false;
+            }else if(data == 2){
+              ob.next("span").css("color", "red").html("验证码不能为空");
+              //添加样式
+              ob.addClass("cur");
+              CODE = false;
+            } else {
+              ob.next("span").css("color", "red").html("验证码已过期");
+              //添加样式
+              ob.addClass("cur");
+              CODE = false;
+            }
+          });
+        });
+
+        //表单提交事件
+        $("form").submit(function(){
+            //让input框触发失去焦点事件
+            $("input").trigger("blur");
+            if (NAME && PWD && REPWD && PHONE){
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+})
+       
+       
+</script>
+    {:widget("Widget/footer")}
+</body>
+</html>

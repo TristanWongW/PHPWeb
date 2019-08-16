@@ -1,0 +1,120 @@
+{extend name="adminpublic:public"}
+{block name="admin"}
+<div class="mws-panel grid_8">
+    <div class="mws-panel-header"> <span><i class="icon-table"></i>权限分配</span>
+
+    </div>
+    <div class="mws-panel-body no-padding">
+        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+            <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
+                aria-describedby="DataTables_Table_1_info">
+                <thead>
+                    <tr role="row">
+                        <th class="checkbox-column">
+                            <!-- <input type="checkbox"> -->
+                        </th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                            style="width: 250px;">权限ID</th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                            style="width: 250px;">权限名</th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                            style="width: 234px;">控制器</th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                            style="width: 234px;">方法</th>
+                        
+                    </tr>
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    {foreach name="node" item="row"}
+                    <tr class="odd">
+                        <td class="checkbox-column" id="list">
+                            <input type="checkbox" {if
+                                            condition="in_array($row['id'],$data)"}checked{/if} value="{$row['id']}">
+                        </td>
+                        <td class=" sorting_1">{$row['id']}</td>
+                        <td class="  ">{$row['name']}</td>
+                        <td class=" ">{$row['mname']}</td>
+                        <td class=" ">{$row['aname']}</td>
+                    </tr>
+                    {/foreach}
+
+                </tbody>
+            </table>
+            
+            <div class="mws-button-row">
+                <input type="button" value="全选" class="btn" id="selectAll">
+                <input type="button" value="反选" class="btn" id="reverse">
+                <input type="button" value="全不选" class="btn" id="unSelect">
+                <input type="submit" value="确认分配" class="btn btn-danger" id="getValue">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    
+    $(function () {
+        //全选  
+        $("#selectAll").click(function () {
+            $(".odd :checkbox").prop("checked", true);
+        });
+        
+        //反选 
+        $("#reverse").click(function () {
+            $(".odd :checkbox").each(function () {
+                $(this).prop("checked", !$(this).prop("checked"));
+            });
+            allchk();
+        });
+        //全不选
+        $("#unSelect").click(function () {
+            $(".odd :checkbox").prop("checked", false);
+        });
+
+        //获取选中选项的值
+        $("#getValue").click(function () {
+            var valArr = new Array;
+            $(".odd :checkbox[checked]").each(function (i) {
+                valArr[i] = $(this).val();
+            });
+            //join函数 分割数组
+            vals = valArr.join(',');
+            //开始 Ajax
+            $.ajax({
+                url:"{:url('/adminpower/insert')}",
+                type:'POST',
+                dataType:'json',
+                data:{data:vals,id:{$id}},
+                success:function(data){
+                    // console.log(data);
+                    if (data.code == 0) {
+                        alert(data.msg);
+                        window.location.reload();
+                        // console.log("分配权限成功");
+                    } else {
+                        // console.log("分配权限失败");
+                        alert(data.msg);
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+    });
+    function allchk() {
+        var chknum = $(".odd :checkbox").length;//选项总个数
+        var chk = 0;
+        $(".odd :checkbox").each(function () {
+            if ($(this).prop("checked") == true) {
+                chk++;
+            }
+        });
+    }
+
+    
+</script>
+{/block}
+{block name="title"}权限分配列表{/block}

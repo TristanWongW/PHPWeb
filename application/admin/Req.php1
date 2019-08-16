@@ -1,0 +1,45 @@
+<?php
+namespace app\admin\controller;
+//导入 Controller
+use think\Controller;
+class Req extends Controller
+{   
+    
+    public function getindex()
+    {   //创建请求对象
+        $request = request();
+        // echo "<pre>";
+        // var_dump($request);
+        //获取url地址 不包含域名
+        $url = $request->url();
+        //获取完整的url地址 包含域名
+        $url1 = $request->url(true);
+        //获取ip
+        $ip = $request->ip();
+        //获取请求方式
+        $method = $request->method();
+        // echo $url."<br/>".$url1."<br/>".$ip."<br/>".$method;
+
+        //获取所有参数
+        $params = $request->param();
+        // echo "<pre>";
+        // var_dump($params);
+        //获取单个参数 name
+        $name = $request->param('name');
+        // echo $name;
+        //获取部分参数name age
+        $part = $request->only(['name','age']);
+        // \var_dump($part);
+        //获取除了name 意外的参数
+        $exp = $request->except(['name']);
+        // \var_dump($exp);
+        //获取访问模块名 控制器 方法
+        $module = $request->module();
+        $controller = $request->controller();
+        $action = $request->action();
+        echo $module."<br/>".$controller."<br/>".$action;
+        
+    }
+
+    
+}

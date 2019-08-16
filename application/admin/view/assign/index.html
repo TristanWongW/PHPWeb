@@ -1,0 +1,51 @@
+{extend name="adminpublic:public"}
+{block name="admin"}
+    <div class="mws-panel grid_8">
+        <div class="mws-panel-header"> <span><i class="icon-table"></i>{$name[0]['name']} :对应权限列表</span>
+    
+        </div>
+        <div class="mws-panel-body no-padding">
+            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+                <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
+                    aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr role="row">
+                           
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 250px;">角色对应的权限</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                style="width: 234px;">权限对应的控制器</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                style="width: 234px;">权限对应的方法</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                                rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+                                style="width: 120px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                        {foreach name="node" item="row"}
+                        <tr class="odd">
+                            <td class="  sorting_1">{$row['name']}</td>
+                            <td class=" ">{$row['mname']}</td>
+                            <td class=" ">{$row['aname']}</td>
+                            <td class=" "><a href="/adminnode/delete/id/{$row['id']}" class="btn btn-success">删除</a><a href="/adminnode/edit/id/{$row['id']}" class="btn btn-info">修改</a></td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+                <div class="mws-button-row">
+                    <input type="hidden" name="id" value="{$id}">
+                    <a href="/adminpower/add/id/{$id}" class="btn btn-info">分配权限</a>
+                    <input type="reset" value="Reset" class="btn ">
+                </div>
+                <div class="dataTables_paginate paging_full_numbers" id="pages">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+{block name="title"}角色权限列表{/block}

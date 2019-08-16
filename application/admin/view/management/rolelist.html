@@ -1,0 +1,36 @@
+{extend name="adminpublic:public"}
+{block name="admin"}
+    <div class="container">
+    
+        <div class="container">
+    
+            <div class="mws-panel-body no-padding">
+                <form class="mws-form" action="/adminsuser/saverole" method="post">
+                    <div class="mws-form-inline">
+                        <div class="mws-form-row">
+                            <label class="mws-form-label">角色信息</label>
+                            <div class="mws-form-item clearfix">
+                                <h4>当前用户：{$user['name']}的角色信息</h4>
+                                <ul class="mws-form-list inline">
+                                    {foreach name="role" item="row"}
+                                    <li><input type="checkbox" value="{$row['id']}" name="rid[]" {if
+                                            condition="in_array($row['id'],$rids)" }checked{/if}>
+                                            <label>{$row['name']}</label></li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mws-button-row">
+                        <input type="hidden" name="uid" value="{$user['id']}">
+                        <input value="分配角色" class="btn btn-danger" type="submit">
+                        <input value="重置" class="btn " type="reset">
+                    </div>
+                </form>
+            </div>
+    
+
+        </div>
+    </div>
+{/block}
+{block name="title"}后台角色分配列表{/block}
