@@ -4,13 +4,13 @@ namespace app\home\controller;
 use think\Controller;
 //导入Db类
 use think\Db;
-class Listp extends Controller
+class Product extends Controller
 {
    
-    //加载商品列表模板
+    //加载列表模板
     public function getindex()
     {
-        return $this->fetch("listp/list");
+        return $this->fetch("Product/index");
     }
 
    

@@ -3,6 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>前台首页</title>
+    <style>
+      .ov-hd {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .ph {
+            height: 188px;
+            width: 188px;
+      }
+      .mm {
+          width: 100px;
+          height: 30px;
+          background-color: #ccc;
+          text-align: center;
+          line-height: 30px;
+          float: left;
+          list-style-type: none;
+          cursor: pointer;
+      }
+            
+      .ll {
+        width: 100px;
+        height: 30px;
+        background-color: orange;
+        text-align: center;
+        line-height: 30px;
+        float: left;
+        list-style-type: none;
+        border-right: 1px dashed green;
+        cursor: pointer;
+      }
+      .marin-m{
+        width: 1168px;
+        border: 1px solid #ebebeb;
+        margin: auto;
+        text-align: center;
+      }
+      #pss{
+        position: relative;
+        margin: auto;
+      }
+      /* .spd{
+        overflow: hidden;
+      } */
+      .pdt{
+        width: 248px;
+        height: 300px;
+        padding: 10px;
+        border-radius: 3px;
+        border: 1px solid #ebebeb;
+        float: left;
+        margin: 3px;
+        text-align: center;
+      }
+      .byt{
+        width: 230px;
+        height: 30px;
+        background: #c1d7d0;
+        line-height: 30px;
+        font-size: 18px;
+        margin-top: 3px;
+      }
+    </style>
 </head>
 <body>
     <!-- Widget类下的header方法 -->
@@ -129,185 +193,32 @@
             <!-- Umino's Banner Area Seven End Here -->
             
             <!-- 商品遍历部分 -->
-            {foreach name="category" item="row"}
-            <div class="umino-product-tab_area">
-              <div class="umino-product-tab_nav">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="product-tab">
-                        <ul class="nav product-menu">
-                          <li><a class="active" data-toggle="tab" href="#"><span>{$row['name']}</span></a></li>
-                          {foreach name="row['shop']" item="rows"}
-                          <li class="lt" cid="{$rows['id']}"><a data-toggle="tab" href="#new-arrivals"><span>{$rows['name']}</span></a></li>
-                          {/foreach}
-                        </ul>
-                      </div>
-                    </div>
+                {foreach name="category" item="row"}
+                <div  class="main-m">
+                  <div  id="pss" style="width:1168px;border:1px solid #ebebeb;margin: auto;margin-top: 40px;">
+                    <ul style="overflow: hidden;">
+                    <li class="mm">{$row['name']}</li>
+                    {foreach name="row['shop']" item="rows"}
+                    <li class="ll" cid="{$rows['id']}" name="{$row['id']}">{$rows['name']}</li>
+                    {/foreach}</ul>
+                    <br>
+                    <ul class="uid{$row['id']}" style="overflow: hidden">
+                      {foreach name="data" item="r"}
+                      <li class="pdt">
+                        <a href="/productdetail/index/id/{$r['id']}"><img src="{$r['pic']}" class="ph"></a>
+                        <p>{$r['name']}</p>
+                        <p style="font-size: 20px; color: red">{$r['price']}元</p>
+                        {/foreach}</p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              </div>
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="tab-content umino-tab_content">
-                      <div id="featured" class="tab-pane active show" role="tabpanel">
-                        <div class="umino-product-tab_slider slider-navigation_style-1">
-                          <div class="slide-item">
-                            <div class="single-product">
-                              <div class="product-img">
-                                <a href="single-product.html">
-                                  <img class="primary-img" src="/static/homes/images/product/medium-size/4-2.jpg"
-                                    alt="Umino's Product Image">
-                                </a>
-                                <div class="add-actions">
-                                  <ul>
-                                    <li><a href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To cart"><i
-                                          class="ion-bag"></i></a>
-                                    </li>
-                                    <li><a href="wishlist.html" data-toggle="tooltip" data-placement="top"
-                                        title="Add To Wishlist"><i class="ion-ios-heart-outline"></i></a>
-                                    </li>
-                                    <li><a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i
-                                          class="fa fa-chart-bar"></i></a>
-                                    </li>
-                                    <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
-                                        href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                          class="ion-ios-search"></i></a></li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="product-content">
-                                <div class="product-desc_info">
-                                  <div class="price-box">
-                                    <span class="new-price">$79.00</span>
-                                    <span class="old-price">$85.00</span>
-                                  </div>
-                                  <h6 class="product-name"><a href="single-product.html">Curabitur tristique neque</a>
-                                  </h6>
-                                  <div class="rating-box">
-                                    <ul>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li class="silver-color"><i class="ion-ios-star-outline"></i></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- <div id="new-arrivals" class="tab-pane" role="tabpanel">
-                        <div class="umino-product-tab_slider slider-navigation_style-1">
-                          <div class="slide-item">
-                            <div class="single-product">
-                              <div class="product-img">
-                                <a href="single-product.html">
-                                  <img class="primary-img" src="/static/homes/images/product/medium-size/8-1.jpg"
-                                    alt="Umino's Product Image">
-                                </a>
-                                <div class="add-actions">
-                                  <ul>
-                                    <li><a href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To cart"><i
-                                          class="ion-bag"></i></a>
-                                    </li>
-                                    <li><a href="wishlist.html" data-toggle="tooltip" data-placement="top"
-                                        title="Add To Wishlist"><i class="ion-ios-heart-outline"></i></a>
-                                    </li>
-                                    <li><a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i
-                                          class="fa fa-chart-bar"></i></a>
-                                    </li>
-                                    <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
-                                        href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                          class="ion-ios-search"></i></a></li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="product-content">
-                                <div class="product-desc_info">
-                                  <div class="price-box">
-                                    <span class="new-price">$70.00</span>
-                                    <span class="old-price">$80.00</span>
-                                  </div>
-                                  <h6 class="product-name"><a href="single-product.html">Aliquet auctor semali</a>
-                                  </h6>
-                                  <div class="rating-box">
-                                    <ul>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li class="silver-color"><i class="ion-ios-star-half"></i></li>
-                                      <li class="silver-color"><i class="ion-ios-star-outline"></i></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="best-seller" class="tab-pane" role="tabpanel">
-                        <div class="umino-product-tab_slider slider-navigation_style-1">
-                          <div class="slide-item">
-                            <div class="single-product">
-                              <div class="product-img">
-                                <a href="single-product.html">
-                                  <img class="primary-img" src="/static/homes/images/product/medium-size/5-3.jpg"
-                                    alt="Umino's Product Image">
-                                </a>
-                                <div class="add-actions">
-                                  <ul>
-                                    <li><a href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To cart"><i
-                                          class="ion-bag"></i></a>
-                                    </li>
-                                    <li><a href="wishlist.html" data-toggle="tooltip" data-placement="top"
-                                        title="Add To Wishlist"><i class="ion-ios-heart-outline"></i></a>
-                                    </li>
-                                    <li><a href="compare.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i
-                                          class="fa fa-chart-bar"></i></a>
-                                    </li>
-                                    <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
-                                        href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                          class="ion-ios-search"></i></a></li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="product-content">
-                                <div class="product-desc_info">
-                                  <div class="price-box">
-                                    <span class="new-price">$95.00</span>
-                                    <span class="old-price">$100.00</span>
-                                  </div>
-                                  <h6 class="product-name"><a href="single-product.html">Accumsan mauris ullaat</a>
-                                  </h6>
-                                  <div class="rating-box">
-                                    <ul>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li><i class="ion-ios-star"></i></li>
-                                      <li class="silver-color"><i class="ion-ios-star-half"></i></li>
-                                      <li class="silver-color"><i class="ion-ios-star-outline"></i></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             {/foreach}
             <!-- Umino's Product Tab Area End Here -->
             <!-- Begin Umino's Banner Area -->
             
             <!-- Begin Umino's Brand Area -->
+
             <div class="umino-brand_area">
               <div class="container">
                 <div class="umino-brand_nav">
@@ -358,11 +269,22 @@
             <!-- Umino's Brand Area End Here -->
 <script type="text/javascript">
   // alert($);
-  $(".lt").click(function(){
+  $(".ll").click(function(){
     // alert("哈哈哈");
     //获取cid属性 也就是当前一级分类的id
     cid = $(this).attr('cid');
-    alert(cid);
+    name=$(this).attr('name');
+    // alert(cid);
+    // Ajax遍历商品
+    $.get("/homeindex/index",{cid:cid},function(data){
+        // alert(data);
+        $(".uid" +name).children().remove();
+        for (var i = 0; i < data.length; i++) {
+            // alert(data[i].pid);
+            content = $('<li class="pdt"><a href="/productdetail/index/id/'+data[i]['pid']+'"><img src="'+data[i]['pic']+'" class="ph"></a><p>' + data[i]['pname'] +'</p><p style="font-size: 20px; color: red">' + data[i]['price'] +'元</p></li>');
+            $(".uid"+name).append(content);
+        }
+    },'json');
   });
 </script>
 

@@ -25,7 +25,6 @@ class  Login extends Controller
         // \var_dump($row);
         if ($row) {
             //把用户登录信息存储到session
-                Session::set('islogin',1);
                 Session::set('userid',$row[0]['id']);
                 Session::set('username',$row[0]['username']);
             //跳转到前台首页
@@ -65,7 +64,13 @@ class  Login extends Controller
         } else {
             $this->success("密码修改失败","/homelogin/login");
         }
-        
+    }
+    
+    //登出
+    public function getlogout(){
+        Session::delete('username');
+        Session::delete('userid');
+        $this->success("退出成功","/homelogin/login");
     }
 }
 ?>

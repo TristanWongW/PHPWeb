@@ -42,6 +42,8 @@ Route::controller("/homelogin","home/Login");
 Route::controller("/homeindex","home/Index");
 //前台列表
 Route::controller("/homelist","home/Listp");
+//商品详情页
+Route::controller("/productdetail","home/Product");
 
 
 ?>

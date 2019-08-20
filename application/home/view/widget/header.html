@@ -68,12 +68,16 @@
                             <div class="ht-right_area">
                                 <div class="ht-menu">
                                     <ul>
-                                        <li><a href="my-account.html">我的账户</a></li>
-                                        <li><a href="cart.html">我的购物车</a></li>
-                                        <li><a href="wishlist.html">收藏夹</a></li>
-                                        <li><a href="checkout.html">登出</a></li>
+                                        {if condition="$Think.session.username"}
+                                            <li><a href="my-account.html">{$Think.session.username}</a></li>
+                                            <li><a href="cart.html">我的购物车</a></li>
+                                            <li><a href="/homelogin/logout">登出</a></li>
+                                            {else}
+                                            <li><a href="/homeregister/register">请注册</a></li>
+                                            <li><a href="/homelogin/login">请登录</a></li>
+                                        {/if}
                                     </ul>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -84,7 +88,7 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-2">
                             <div class="header-logo">
-                                <a href="index.html">
+                                <a href="/homeindex/index">
                                     <img src="/static/homes/images/menu/logo/1.png" alt="Umino's Header Logo">
                                 </a>
                             </div>
