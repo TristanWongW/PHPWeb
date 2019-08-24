@@ -44,6 +44,12 @@ Route::controller("/homeindex","home/Index");
 Route::controller("/homelist","home/Listp");
 //商品详情页
 Route::controller("/productdetail","home/Product");
+//购物车
+Route::controller("/productcart","home/Cart");
+//购物车 2 登录后才可购物
+Route::controller("/productcarts","home/Carts");
+//结算
+Route::controller("/productaddress","home/Address");
 
 
 ?>

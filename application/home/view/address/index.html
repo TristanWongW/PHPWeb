@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>结算页</title>
+    <style type="text/css">
+      .address {
+        float: right;
+      }
+    
+      .did {
+        width: 100%;
+        height: 200px;
+    
+    
+      }
+    
+      .did1 {
+        width: 200px;
+        height: 200px;
+        border-radius: 30px;
+        border: 5px dotted green;
+        float: left;
+        margin: 5px;
+       
+      }
+      .did2{
+        margin-top:30px;
+      }
+    
+      .selected {
+        border: 8px solid orange;
+        background-color: #ccc;
+      }
+    </style>
+</head>
+<body>
+    <!-- Widget类下的header方法 -->
+
+    {:widget("Widget/header")}
+      <div class="breadcrumb-area">
+        <div class="container">
+          <div class="breadcrumb-content">
+            <ul>
+              <li><a href="/homeindex/index">首页</a></li>
+              <li class="active">结算页</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Umino's Breadcrumb Area End Here -->
+      <div class="checkout-area">
+        <div class="container">
+          <h5>收货地址</h5>
+          <button class="btn btn-success address" data-toggle="modal" data-target="#Mymodal">添加收货地址</button>
+          <div class="modal fade" id="Mymodal">
+            <div class="modal-dialog">
+              <!-- modal主体 -->
+              <div class="modal-content">
+                <!-- modal 头-->
+                <div class="modal-header">
+                  <button class="close" type="button" data-dismiss="modal">&times;</button>
+                  <!-- modal 标题 -->
+                  <h3 class=" text-center modal-title">添加收货地址</h3>
+                </div>
+                <!-- modal  body-->
+                <div class="modal-body">
+                  <form role="form" action="/homeaddress/insertaddress" method="post" id="bb">
+                      <div class="form-group">
+                        <label>收货人</label>
+                        <input type="text" class="form-control" name="name">
+                      </div>
+                      <div class="form-group">
+                        <label>电话</label>
+                        <input type="text" class="form-control" name="phone">
+                      </div>
+                      <div class="form-group">
+                        <label>省市信息</label>
+                        <select id="cid">
+                          <option value="" class="ss">--请选择--</option>
+                        </select>
+                      </div>
+                      <input type="hidden" name="huo" value="">
+                      <button type="submit" id="ss" class="btn btn-success">添加</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="did">
+            <div class="did1">
+              <div class="did2">
+                <h6>收货人:韦尔奇</h6>
+                <h6>电话:4534534354</h6>
+                <h6>省市信息:人情味而且我而且我而而且玩儿</h6>
+              </div>
+            </div>
+          </div>
+          
+          <h5>已购信息</h5>
+          <table class="table table-bordered table-hover">
+            <tr>
+              <th>名字</th>
+              <th>商品</th>
+              <th>数量</th>
+              <th>单价</th>
+              <th>总计</th>
+            </tr>
+            {foreach name="shop" item="row"}
+              <tr>
+                <td>{$row['name']}</td>
+                <td><img src="{$row['pic']}" style="width: 150px;height: 100px;"></td>
+                <td>{$row['num']}</td>
+                <td>{$row['price']}</td>
+                <td>{$row['num']*$row['price']}.00</td>
+              </tr>
+            {/foreach}
+          </table>
+          <div class="row">
+            <div class="col-md-5 ml-auto">
+              <div class="cart-page-total">
+                <h2>所有商品</h2>
+                <ul>
+                  <li>总价 <span>$118.60</span></li>
+                </ul>
+                <input type="hidden" name="address_id" value="">
+                <a href="" class="btn btn-info">提交订单</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    {:widget("Widget/footer")}
+</body>
+</html>

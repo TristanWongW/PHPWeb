@@ -61,6 +61,7 @@ class Admins extends Allow
         $management = new Management();
         //获取要修改的数据
         $user = $management->where("id","{$id}")->find();
+        // $user = Db::table("admin_users")->where("id","{$id}")->find();
         // \var_dump($user);die;
         //加载模板 并且数组传递数据到执行修改页面
         return $this->fetch("management/edit",["user"=>$user]);
@@ -73,7 +74,7 @@ class Admins extends Allow
         //获取修改数据的id
         $id = $request->param('id');
         //封装修改的数据
-        $data = $request->only(['username','pwd','state']);
+        $data = $request->only(['name','pwd']);
         if (Management::where('id',"{$id}")->update($data)) {
             $this->success("信息修改成功","/adminsuser/index");
         } else {

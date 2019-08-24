@@ -197,25 +197,27 @@
                 <div  class="main-m">
                   <div  id="pss" style="width:1168px;border:1px solid #ebebeb;margin: auto;margin-top: 40px;">
                     <ul style="overflow: hidden;">
-                    <li class="mm">{$row['name']}</li>
+                    <li class="mm" pid="{$row['id']}">{$row['name']}</li>
                     {foreach name="row['shop']" item="rows"}
                     <li class="ll" cid="{$rows['id']}" name="{$row['id']}">{$rows['name']}</li>
                     {/foreach}</ul>
                     <br>
                     <ul class="uid{$row['id']}" style="overflow: hidden">
                       {foreach name="data" item="r"}
-                      <li class="pdt">
-                        <a href="/productdetail/index/id/{$r['id']}"><img src="{$r['pic']}" class="ph"></a>
-                        <p>{$r['name']}</p>
-                        <p style="font-size: 20px; color: red">{$r['price']}元</p>
-                        {/foreach}</p>
-                      </li>
+                        <li class="pdt">
+                          <a href="/productdetail/index/id/{$r['id']}"><img src="{$r['pic']}" class="ph"></a>
+                          <p>{$r['name']}</p>
+                          <p style="font-size: 20px; color: red">{$r['price']}元</p>
+                          </p>
+                        </li>
+                      {/foreach}
                     </ul>
                   </div>
                 </div>
             {/foreach}
+            
             <!-- Umino's Product Tab Area End Here -->
-            <!-- Begin Umino's Banner Area -->
+            
             
             <!-- Begin Umino's Brand Area -->
 
@@ -268,6 +270,21 @@
             </div>
             <!-- Umino's Brand Area End Here -->
 <script type="text/javascript">
+$(function () {
+  //获取顶级分类的id
+  pid = $('.mm').eq(0);
+  $.get('',{},function() {
+    
+  },'json')
+  pid = $(".mm").eq(0);
+  $.get('', {}, function () {
+
+  }, 'json')
+  pid = $(".mm").eq(0);
+  $.get('', {}, function () {
+
+  }, 'json')
+})
   // alert($);
   $(".ll").click(function(){
     // alert("哈哈哈");
@@ -278,6 +295,7 @@
     // Ajax遍历商品
     $.get("/homeindex/index",{cid:cid},function(data){
         // alert(data);
+        // console.log(data);
         $(".uid" +name).children().remove();
         for (var i = 0; i < data.length; i++) {
             // alert(data[i].pid);

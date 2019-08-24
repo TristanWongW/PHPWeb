@@ -18,7 +18,8 @@ class Index extends Controller
         }
         return $data1;
     }
-   
+    
+    //主页模板
     public function getindex()
     {    
         //创建请求对象
@@ -29,12 +30,15 @@ class Index extends Controller
         // \print_r($category);
         //获取当前一级分类的id
         $cid = $request->get("cid");
+        //获取数据总条数
+        $count = Db::table("product")->where("product.c_id","{$cid}")->count();
+        // echo $count;
         //检测当前请求是否为Ajax
         if (!$request->isAjax()) {
             //如果当前不是Ajax请求 获取当前以及id上的顶级id下5条商品数据
-            // $sql = "select pd.name, pd.pic, pd.descr, pd.price, c.name from product pd left join category c on pd.c_id = c.id limit 5";
             $data = Db::table("product")->limit(5)->select();
-            // $data = Db::query($sql);
+            // $sql = "SELECT * from product LEFT JOIN category on product.c_id = category.id AND category.pid = 0";
+            // $data = Db::query($sql);=
             return $this->fetch("index/index",['category'=>$category,'data'=>$data]);
         }
         
@@ -42,6 +46,12 @@ class Index extends Controller
         // echo $cid;
         //获取当前一级分类下的所有商品数据
         $res = Db::table("product")->alias('p')->field("p.id as pid,p.name as pname,p.pic,p.descr,p.price,c.id as cid,c.name as cname")->where("p.c_id","{$cid}")->join("category c","p.c_id=c.id")->select();
+        // \var_dump($res);die;
+        echo json_encode($res);
+    }
+    public function ddd(){
+        $cid=input('cid');
+         $res = Db::table("product")->alias('p')->field("p.id as pid,p.name as pname,p.pic,p.descr,p.price,c.id as cid,c.name as cname")->where("p.c_id","{$cid}")->join("category c","p.c_id=c.id")->select();
         // \var_dump($res);die;
         echo json_encode($res);
     }

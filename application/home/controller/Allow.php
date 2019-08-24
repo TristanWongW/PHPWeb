@@ -11,7 +11,7 @@ class Allow extends Controller
     public function _initialize(){
         // echo '这是初始化方法_initialize();';die;
         //检测用户的Session 信息
-        if (!Session::get('islogin')) {
+        if (!Session::get('userid')) {
             //用户信息不存在 跳转到后台登录页
             $this->error("请先登录","/homelogin/login");
         } 

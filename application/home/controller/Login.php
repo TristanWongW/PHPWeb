@@ -28,7 +28,8 @@ class  Login extends Controller
                 Session::set('userid',$row[0]['id']);
                 Session::set('username',$row[0]['username']);
             //跳转到前台首页
-            $this->success("登录成功","/homeindex/index");
+            // $this->success("登录成功","/homeindex/index");
+            $this->redirect("/homeindex/index");
         } else{
             $this->error("用户名或者密码错误","/homelogin/login");
         }

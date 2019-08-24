@@ -48,8 +48,6 @@ class Assign extends Allow
     //执行添加权限
     public function  postinsert(){
         //打印ajax传过来的值
-        // \var_dump($_POST);
-        $request = \request();
         //获取角色id
         $id = $_POST['id'];
         //把ajax传过来的字符串 分割成数组

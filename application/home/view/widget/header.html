@@ -70,7 +70,7 @@
                                     <ul>
                                         {if condition="$Think.session.username"}
                                             <li><a href="my-account.html">{$Think.session.username}</a></li>
-                                            <li><a href="cart.html">我的购物车</a></li>
+                                            <li><a href="/productcart/index">我的购物车</a></li>
                                             <li><a href="/homelogin/logout">登出</a></li>
                                             {else}
                                             <li><a href="/homeregister/register">请注册</a></li>
@@ -241,7 +241,7 @@
                                                     {if condition="$rows['shop']"}
                                                     <ul>
                                                         {volist name="rows['shop']" id="rowss"}
-                                                        <li><a href="#">{$rowss['name']}</a></li>
+                                                        <li><a href="">{$rowss['name']}</a></li>
                                                         {/volist}
                                                     </ul>
                                                     {/if}

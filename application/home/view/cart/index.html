@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    
+</head>
+<body>
+    <!-- Widget类下的header方法 -->
+
+    {:widget("Widget/header")}
+      <div class="breadcrumb-area">
+        <div class="container">
+          <div class="breadcrumb-content">
+            <ul>
+              <li><a href="/homeindex/index">首页</a></li>
+              <li class="active">购物车</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Umino's Breadcrumb Area End Here -->
+      <!-- Begin Umino's Cart Area -->
+      <div class="umino-cart-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <form action="javascript:void(0)">
+                <div class="table-content table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="umino-product-remove"><label>全选<input type="checkbox" value=""></label></th>
+                        <th class="umino-product-remove">删除</th>
+                        <th class="umino-product-thumbnail">图片</th>
+                        <th class="cart-product-name">商品</th>
+                        <th class="umino-product-price">单价</th>
+                        <th class="umino-product-quantity">数量</th>
+                        <th class="umino-product-subtotal">总计</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {foreach name="product" item="row"}
+                          <tr>
+                            <td class="checkbox-column" id="list">
+                              <input type="checkbox" value="{$row['id']}">
+                            </td>
+                            <td class="umino-product-remove"><a href="javascript:void(0)" class="del" name="{$row['id']}"><i class="fa fa-trash"
+                                  title="删除"></i></a></td>
+                            <td class="umino-product-thumbnail"><a href="javascript:void(0)"><img
+                                  src="{$row['pic']}" style="width: 150px" alt="Umino's Cart Thumbnail"></a></td>
+                            <td class="umino-product-name"><a href="javascript:void(0)">{$row['name']}</a></td>
+                            <td class="umino-product-price">{$row['price']}.00</td>
+                            <td class="quantity">
+                              <label>数量</label>
+                                <button class="btn btn-success addt" name="{$row['id']}">+</button>
+                                <input class="cart-plus-minus-box" style="width: 50px" value="{$row['num']}" type="text">
+                                <button class="btn btn-success subt" name="{$row['id']}">-</button>
+                            </td>
+                            <td class="product-subtotal">{$row['price']*$row['num']}.00</td>
+                          </tr>
+                      {/foreach}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="coupon-all">
+                      <div class="coupon">
+                        <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code"
+                          type="text">
+                        <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
+                      </div>
+                      <div class="coupon2">
+                        <a href="/homeindex/index"><input class="button" name="update_cart" value="继续购物" type="button"></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 ml-auto">
+                    <div class="cart-page-total">
+                      <h2>购物总计</h2>
+                      <ul>
+                        <!-- <li>单价 <span>{$row['price']}</span></li> -->
+                        <li>总计 <span>{$row['price']*$row['num']}.00</span></li>
+                      </ul>
+                      <a href="javascript:void(0)">去结算</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+            
+<script type="text/javascript">
+$(function(){
+  // alert($);
+  //购物车 减法
+  //获取button 绑定单击事件
+  $(".subt").click(function(){
+      //获取商品的id
+      id = $(this).attr("name");
+      // alert(id);
+      ob = $(this);
+      //Ajax 传递id参数
+      $.get("/productcart/subtraction",{id:id},function(data){
+        // alert(data.num);
+        //获取当前事件作用的button input赋值数量
+        ob.prev("input").val(data.num);
+        //赋值总计
+        ob.parents("tr").find("td:eq(6)").html(data.total);
+      },'json');
+  });
+
+  //购物车 加法
+  $(".addt").click(function(){
+      //获取商品id
+      id = $(this).attr("name");
+      ob = $(this);
+      //Ajax 传递id
+      $.get("/productcart/addition",{id:id},function(data){
+        // alert(data);
+        //赋值数量和总计
+        ob.next("input").val(data.num);
+        ob.parents("tr").find("td:eq(6)").html(data.total);
+      },'json');
+  });
+
+  //删除
+  $(".del").click(function(){
+    //获取id
+    id = $(this).attr("name");
+    ob = $(this);
+    //Ajax
+    $.get("/productcart/del",{id:id},function(data){
+        // alert(data);
+        if (data == 1) {
+          // alert("删除成功");
+          //删除当前的tr
+          ob.parents("tr").remove();
+        } 
+    });
+  });
+})
+
+</script>
+
+    {:widget("Widget/footer")}
+</body>
+</html>
