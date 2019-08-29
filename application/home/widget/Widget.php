@@ -11,7 +11,7 @@ class Widget extends Controller {
         $data1 = array();
         //遍历$data
         foreach ($data as $key => $value) {
-            //获取子类信息 也就是把父类id存储到shop中
+            //获取子类信息 也就是把父类id存储到shop中 当前ID也就是子类的父ID
             $value['shop'] = $this->getcategorybypid($value['id']);
             $data1[] = $value;
         }

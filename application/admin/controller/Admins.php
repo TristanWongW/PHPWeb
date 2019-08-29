@@ -99,11 +99,17 @@ class Admins extends Allow
         $data = Db::table("user_role")->where('uid',"{$id}")->select();
         //获取角色id 存储在数组里
         //遍历
-        foreach($data as $v){
-            $rids[] = $v['rid'];
+        if (!empty($data)) {
+            foreach($data as $v){
+                $rids[] = $v['rid'];
+            }
+            //加载模板
+            return $this->fetch("management/rolelist",['user'=>$user,'role'=>$role,'rids'=>$rids]);
+        } else {
+             //加载模板
+            return $this->fetch("management/rolelist",['user'=>$user,'role'=>$role]);
         }
-        //加载模板
-        return $this->fetch("management/rolelist",['user'=>$user,'role'=>$role,'rids'=>$rids]);
+
     }
 
     //保存角色

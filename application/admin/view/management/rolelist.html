@@ -13,9 +13,13 @@
                                 <h4>当前用户：{$user['name']}的角色信息</h4>
                                 <ul class="mws-form-list inline">
                                     {foreach name="role" item="row"}
-                                    <li><input type="checkbox" value="{$row['id']}" name="rid[]" {if
-                                            condition="in_array($row['id'],$rids)" }checked{/if}>
+                                    {if isset($rids)}
+                                    <li><input type="checkbox" value="{$row['id']}" name="rid[]" {if condition="in_array($row['id'],$rids)" }checked{/if}>
                                             <label>{$row['name']}</label></li>
+                                    {else}   
+                                    <li><input type="checkbox" value="{$row['id']}" name="rid[]">
+                                            <label>{$row['name']}</label></li>
+                                    {/if} 
                                     {/foreach}
                                 </ul>
                             </div>

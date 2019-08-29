@@ -77,7 +77,7 @@
 
         //获取选中选项的值
         $("#getValue").click(function () {
-            var valArr = new Array;
+            valArr = [];
             $(".odd :checkbox[checked]").each(function (i) {
                 valArr[i] = $(this).val();
             });

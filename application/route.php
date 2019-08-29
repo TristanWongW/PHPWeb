@@ -50,6 +50,7 @@ Route::controller("/productcart","home/Cart");
 Route::controller("/productcarts","home/Carts");
 //结算
 Route::controller("/productaddress","home/Address");
-
+//订单
+Route::controller("/productorder","home/Order");
 
 ?>
